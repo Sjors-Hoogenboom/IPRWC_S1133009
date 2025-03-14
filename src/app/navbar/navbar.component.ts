@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
+  imports: [RouterModule],
   standalone: true,
   styleUrls: ['./navbar.component.css']
 })
