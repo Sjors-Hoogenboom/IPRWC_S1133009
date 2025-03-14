@@ -7,7 +7,7 @@ import {RouterModule} from '@angular/router';
   templateUrl: './navbar.component.html',
   imports: [RouterModule],
   standalone: true,
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;

@@ -1,10 +1,14 @@
 <nav class="navbar">
-  <a routerLink="/">Home</a>
-  <a routerLink="/products">Products</a>
+  <div class="nav-links">
+    <a routerLink="/">Home</a>
+    <a routerLink="/products">Products</a>
+  </div>
 
-  @if (!isLoggedIn) {
-    <button (click)="login()">Login</button>
-  } @else {
-    <button (click)="logout()">Logout</button>
-  }
+  <div class="auth-buttons">
+    @if (!isLoggedIn) {
+      <button (click)="login()">Login</button>
+    } @else {
+      <button (click)="logout()">Logout</button>
+    }
+  </div>
 </nav>

@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3344AA;
+  padding: 10px 20px;
+  color: white;
+
+  .nav-links {
+    display: flex;
+    gap: 15px;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #f0a500;
+    }
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  button {
+    background-color: #f0a500;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+
+    &:hover {
+      background-color: #d48b00;
+    }
+  }
+}
