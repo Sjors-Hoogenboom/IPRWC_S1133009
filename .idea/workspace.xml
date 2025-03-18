@@ -4,45 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48940d2d-0964-45af-b1a3-1a7ad33d9d72" name="Changes" comment="Component added">
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.routes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/navbar/navbar.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/products/product.model.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/products/products.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/products/products.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/products/products.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/products/products.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/products/products.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/auth.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.spec.json" beforeDir="false" />
+    <list default="true" id="48940d2d-0964-45af-b1a3-1a7ad33d9d72" name="Changes" comment="Changed gitignore">
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/configuration/WebSecurityConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/controllers/SignupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/dto/SignupRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/entities/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/repository/CustomerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/services/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/services/AuthServiceImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/resources/application.properties.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,7 +56,12 @@
   &quot;keyToString&quot;: {
     &quot;JavaScript Debug.Angular Application.executor&quot;: &quot;Run&quot;,
     &quot;Karma.AppComponent.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.IprwcApplication.executor&quot;: &quot;Run&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Sjors/IPRWC_S1133009&quot;,
@@ -80,9 +70,14 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Sjors\\IPRWC_S1133009\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -91,7 +86,7 @@
       <recent name="C:\Users\Sjors\IPRWC_S1133009\angular" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.Angular Application">
+  <component name="RunManager" selected="Spring Boot.IprwcApplication">
     <configuration name="AppComponent" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
       <config-file value="" />
       <karma-package-dir value="$PROJECT_DIR$/node_modules/@angular/cli" />
@@ -107,6 +102,13 @@
     </configuration>
     <configuration name="Angular Application" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
+    </configuration>
+    <configuration name="IprwcApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="spring" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.Sjors_Hoogenboom.IPRWC.IprwcApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Angular CLI Server" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -127,7 +129,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-WS-242.20224.342" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.20224.387" />
+        <option value="bundled-js-predefined-d6986cc7102b-410509235cf1-JavaScript-IU-242.20224.387" />
       </set>
     </attachedChunks>
   </component>
@@ -145,7 +148,7 @@
       <workItem from="1741885598979" duration="11854000" />
       <workItem from="1742225314120" duration="2602000" />
       <workItem from="1742261185009" duration="3600000" />
-      <workItem from="1742265342390" duration="194000" />
+      <workItem from="1742265342390" duration="498000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit angular project">
       <option name="closed" value="true" />
@@ -179,7 +182,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742265242193</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added spring">
+      <option name="closed" value="true" />
+      <created>1742265625375</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742265625375</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Changed gitignore">
+      <option name="closed" value="true" />
+      <created>1742270842749</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742270842749</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +209,8 @@
     <MESSAGE value="Simple navbar and removed template" />
     <MESSAGE value="Small changes navbar" />
     <MESSAGE value="Component added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Component added" />
+    <MESSAGE value="Added spring" />
+    <MESSAGE value="Changed gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed gitignore" />
   </component>
 </project>
