@@ -4,17 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="48940d2d-0964-45af-b1a3-1a7ad33d9d72" name="Changes" comment="Changed gitignore">
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/configuration/WebSecurityConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/controllers/SignupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/dto/SignupRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/entities/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/repository/CustomerRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/services/AuthService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/services/AuthServiceImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/resources/application.properties.example" afterDir="false" />
+    <list default="true" id="48940d2d-0964-45af-b1a3-1a7ad33d9d72" name="Changes" comment="Spring signup request made">
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/controllers/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/dto/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/dto/LoginResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/services/jwt/CustomerServiceImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/utils/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ee56aa37-7a6d-45e8-91e0-7d81e5a51f1a.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ee56aa37-7a6d-45e8-91e0-7d81e5a51f1a.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/configuration/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/configuration/WebSecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/repository/CustomerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/repository/CustomerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/src/main/resources/application.properties.example" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/resources/application.properties.example" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,34 +53,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JavaScript Debug.Angular Application.executor&quot;: &quot;Run&quot;,
-    &quot;Karma.AppComponent.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.IprwcApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sjors/IPRWC_S1133009&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Sjors\\IPRWC_S1133009\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JavaScript Debug.Angular Application.executor": "Run",
+    "Karma.AppComponent.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.IprwcApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Sjors/IPRWC_S1133009",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.build",
+    "ts.external.directory.path": "C:\\Users\\Sjors\\IPRWC_S1133009\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Sjors\IPRWC_S1133009" />
@@ -149,6 +151,7 @@
       <workItem from="1742225314120" duration="2602000" />
       <workItem from="1742261185009" duration="3600000" />
       <workItem from="1742265342390" duration="498000" />
+      <workItem from="1742270871288" duration="3968000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit angular project">
       <option name="closed" value="true" />
@@ -198,7 +201,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742270842749</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Spring signup request made">
+      <option name="closed" value="true" />
+      <created>1742271074636</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742271074636</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -211,6 +222,7 @@
     <MESSAGE value="Component added" />
     <MESSAGE value="Added spring" />
     <MESSAGE value="Changed gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed gitignore" />
+    <MESSAGE value="Spring signup request made" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spring signup request made" />
   </component>
 </project>
