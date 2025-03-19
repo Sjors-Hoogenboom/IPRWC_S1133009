@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48940d2d-0964-45af-b1a3-1a7ad33d9d72" name="Changes" comment="Changed .gitignore">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,6 +144,7 @@
       <workItem from="1742265342390" duration="498000" />
       <workItem from="1742270871288" duration="3968000" />
       <workItem from="1742312734510" duration="7648000" />
+      <workItem from="1742356856317" duration="57000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit angular project">
       <option name="closed" value="true" />
@@ -209,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742356808701</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Changed .gitignore">
+      <option name="closed" value="true" />
+      <created>1742356904584</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742356904584</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
