@@ -25,13 +25,11 @@ export class AuthService {
     localStorage.setItem('token', jwtToken);
     this.decodeToken(jwtToken);
     this.isAuthenticated.next(true);
-    this.router.navigate(['/']);
   }
 
   logout(): void {
     this.isAuthenticated.next(false);
     localStorage.removeItem('token');
-    this.router.navigate(['/']);
   }
 
   private restoreAuthState(): void {

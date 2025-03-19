@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {JwtService} from '../../services/jwt.service';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -24,7 +24,8 @@ export class LoginComponent {
   constructor(
     private service: JwtService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -42,13 +43,14 @@ export class LoginComponent {
       next: (response) => {
         if (response.jwtToken) {
           this.status = 'success';
-          this.message = 'Login successful!';
+          this.message = 'Login successful! Redirecting...';
+
           localStorage.setItem('token', response.jwtToken);
           this.authService.login(response.jwtToken);
 
           setTimeout(() => {
-            window.location.href = '/';
-          }, 1500);
+            this.router.navigate(['/']);
+          }, 2000);
         }
       },
       error: () => {
