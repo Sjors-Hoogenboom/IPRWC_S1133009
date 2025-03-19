@@ -22,7 +22,7 @@ import {CommonModule} from '@angular/common';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent{
-  registerForm!: FormGroup ;
+  registerForm!: FormGroup;
   status: 'idle' | 'success' | 'error' = 'idle';
   message: string = '';
 
@@ -48,7 +48,8 @@ export class RegisterComponent{
 
 
   onSubmitForm() {
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid)
+      return;
 
     this.status = 'idle';
     this.message = '';
@@ -58,8 +59,7 @@ export class RegisterComponent{
         this.status = 'success';
         this.message = response?.message || 'Account created successfully!';
       },
-      error: (err) => {
-        console.error('Registration error:', err);
+      error: () => {
         this.status = 'error';
         this.message = 'Registration failed. Please try again.';
       }

@@ -1,0 +1,29 @@
+<div class="container">
+  <h2>Login</h2>
+
+  <div class="message-container">
+    @if (status === 'success') {
+      <p class="success-message">{{ message }}</p>
+    }
+
+    @if (status === 'error') {
+      <p class="error-message">{{ message }}</p>
+    }
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email" />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" formControlName="password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+  </form>
+</div>
+
+<router-outlet></router-outlet>
