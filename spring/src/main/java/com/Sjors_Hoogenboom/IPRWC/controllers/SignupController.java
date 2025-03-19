@@ -28,10 +28,10 @@ public class SignupController {
 
         Map<String, String> response = new HashMap<>();
         if (isUserCreated) {
-            response.put("message", "Customer created successfully");
+            response.put("message", "Account created successfully!");
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } else {
-            response.put("message", "Failed to create customer");
+            response.put("message", "Registration failed. Please try again.");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }

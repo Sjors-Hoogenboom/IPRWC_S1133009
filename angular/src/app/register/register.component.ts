@@ -56,7 +56,7 @@ export class RegisterComponent{
     this.service.register(this.registerForm.value).subscribe({
       next: (response) => {
         this.status = 'success';
-        this.message = response?.message || 'Customer registered successfully!';
+        this.message = response?.message || 'Account created successfully!';
       },
       error: (err) => {
         console.error('Registration error:', err);

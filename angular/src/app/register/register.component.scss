@@ -63,14 +63,20 @@ button {
   border-color: #b3d7ff;
 }
 
+.message-container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
 .success-message {
   color: green;
-  font-weight: bold;
-  margin-top: 10px;
 }
 
 .error-message {
   color: red;
-  font-weight: bold;
-  margin-top: 10px;
 }
