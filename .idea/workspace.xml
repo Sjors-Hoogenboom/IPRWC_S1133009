@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48940d2d-0964-45af-b1a3-1a7ad33d9d72" name="Changes" comment="Spring signup request made">
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/controllers/HelloController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/filters/JwtRequestFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/configuration/WebSecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring/src/main/java/com/Sjors_Hoogenboom/IPRWC/configuration/WebSecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/spring/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +75,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sjors\IPRWC_S1133009\spring" />
       <recent name="C:\Users\Sjors\IPRWC_S1133009" />
       <recent name="C:\Users\Sjors\IPRWC_S1133009\angular" />
     </key>
