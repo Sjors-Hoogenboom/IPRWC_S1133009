@@ -2,6 +2,7 @@ package com.Sjors_Hoogenboom.IPRWC.controllers;
 
 import com.Sjors_Hoogenboom.IPRWC.dto.LoginRequest;
 import com.Sjors_Hoogenboom.IPRWC.dto.LoginResponse;
+import com.Sjors_Hoogenboom.IPRWC.entities.Customer;
 import com.Sjors_Hoogenboom.IPRWC.services.jwt.CustomerServiceImplementation;
 import com.Sjors_Hoogenboom.IPRWC.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,15 +39,10 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        UserDetails userDetails;
+        Customer customer = customerService.findByEmail(loginRequest.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("Customer not found with email " + loginRequest.getEmail()));
 
-        try {
-            userDetails = customerService.loadUserByUsername(loginRequest.getEmail());
-        } catch (UsernameNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        String jwt = jwtUtil.generateToken(userDetails.getUsername());
+        String jwt = jwtUtil.generateToken(customer.getEmail(), customer.getName());
 
         return ResponseEntity.ok(new LoginResponse(jwt));
     }
