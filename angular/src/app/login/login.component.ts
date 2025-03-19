@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {CommonModule} from '@angular/common';
 import {JwtService} from '../../services/jwt.service';
 import {RouterOutlet} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +23,7 @@ export class LoginComponent {
 
   constructor(
     private service: JwtService,
+    private authService: AuthService,
     private fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
@@ -42,6 +44,8 @@ export class LoginComponent {
           this.status = 'success';
           this.message = 'Login successful!';
           localStorage.setItem('token', response.jwtToken);
+          this.authService.login(response.jwtToken);
+
           setTimeout(() => {
             window.location.href = '/';
           }, 1500);

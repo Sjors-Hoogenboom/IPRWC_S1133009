@@ -11,6 +11,7 @@ import {RouterModule} from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
+  username: string | null = null;
 
   constructor(private authService: AuthService) {}
 
@@ -19,11 +20,9 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = status;
     });
 
-    this.authService.checkAuthStatus();
-  }
-
-  login() {
-    this.authService.login();
+    this.authService.getUsername().subscribe(name => {
+      this.username = name;
+    });
   }
 
   logout() {

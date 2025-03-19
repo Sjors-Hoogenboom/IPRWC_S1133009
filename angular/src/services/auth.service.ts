@@ -7,15 +7,24 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
-  constructor(private router: Router) {}
+  private username = new BehaviorSubject<string | null>(null);
+
+  constructor(private router: Router) {
+    this.checkAuthStatus()
+  }
 
   isLoggedIn(): Observable<boolean> {
     return this.isAuthenticated.asObservable();
   }
 
-  login(): void {
+  getUsername(): Observable<string | null> {
+    return this.username.asObservable();
+  }
+
+  login(jwtToken: string): void {
+    localStorage.setItem('token', jwtToken);
+    this.decodeToken(jwtToken);
     this.isAuthenticated.next(true);
-    localStorage.setItem('auth', 'true');
     this.router.navigate(['/']);
   }
 
@@ -28,5 +37,15 @@ export class AuthService {
   checkAuthStatus(): void {
     const authStatus = localStorage.getItem('auth') === 'true';
     this.isAuthenticated.next(authStatus);
+  }
+
+  private decodeToken(token: string): void {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      this.username.next(payload.sub || 'User');
+    } catch (error) {
+      console.error('Error decoding token', error);
+      this.username.next(null);
+    }
   }
 }

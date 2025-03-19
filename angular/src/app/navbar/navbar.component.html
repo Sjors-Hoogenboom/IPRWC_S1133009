@@ -4,13 +4,14 @@
   </div>
 
   <ul class="auth-buttons">
-    <li>
-      <a routerLink="/register">Register</a>
-    </li>
-    <li>
-      <a routerLink="/login">Login</a>
-    </li>
+    @if (!isLoggedIn) {
+      <li><a routerLink="/register">Register</a></li>
+      <li><a routerLink="/login">Login</a></li>
+    } @else {
+      <li class="user-info">
+        <span>Welcome, {{ username }}</span>
+        <button class="logout-button" (click)="logout()">Logout</button>
+      </li>
+    }
   </ul>
 </nav>
-
-<router-outlet></router-outlet>
