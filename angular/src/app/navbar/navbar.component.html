@@ -13,5 +13,11 @@
         <button class="logout-button" (click)="logout()">Logout</button>
       </li>
     }
+
+    @if (isAdmin) {
+      <li>
+        <a routerLink="/add-product" class="add-product-button">Add Product</a>
+      </li>
+    }
   </ul>
 </nav>

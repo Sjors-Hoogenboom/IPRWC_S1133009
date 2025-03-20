@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   private isAuthenticated = new BehaviorSubject<boolean>(false);
   private username = new BehaviorSubject<string | null>(null);
+  private role = new BehaviorSubject<string | null>(null);
 
   constructor(private router: Router) {
     this.restoreAuthState()
@@ -19,6 +20,10 @@ export class AuthService {
 
   getUsername(): Observable<string | null> {
     return this.username.asObservable();
+  }
+
+  hasRole(role: string): boolean {
+    return this.role.getValue() === role;
   }
 
   login(jwtToken: string): void {
@@ -46,6 +51,7 @@ export class AuthService {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       this.username.next(payload.name || 'User');
+      this.role.next(payload.role || null);
     } catch (error) {
       console.error('Error decoding token', error);
       this.username.next(null);
