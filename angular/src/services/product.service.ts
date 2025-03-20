@@ -18,4 +18,8 @@ export class ProductService {
 
     return this.http.post<any>(this.apiUrl, product, { headers });
   }
+
+  deleteProduct(productId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${productId}`);
+  }
 }

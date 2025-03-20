@@ -5,10 +5,18 @@
         <div class="product-image-container">
           <img [src]="product.imageUrl" [alt]="product.name" class="img-responsive"/>
         </div>
+
         <div class="product-details">
           <div class="product-text">
             <div class="stock">
               <span>Stock: {{ product.stock }}</span>
+              <div class="admin-menu" *ngIf="isAdmin">
+                <button class="dots-button" (click)="toggleDropdown(product.id, $event)">
+                  &#x22EE;
+                </button>
+                <div class="dropdown-menu" *ngIf="dropdownOpen[product.id]">
+                  <button class="delete-btn" (click)="deleteProduct(product.id)">Delete Product</button>
+                </div>
             </div>
             <div class="product-content">
               <div class="title-product">
