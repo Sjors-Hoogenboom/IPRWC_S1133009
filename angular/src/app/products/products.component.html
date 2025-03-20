@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3" *ngFor="let product of products; trackBy: trackById">
-      <div class="wsk-cp-product">
-        <div class="wsk-cp-img">
+      <div class="product-card">
+        <div class="product-image-container">
           <img [src]="product.imageUrl" [alt]="product.name" class="img-responsive"/>
         </div>
-        <div class="wsk-cp-text">
+        <div class="product-details">
           <div class="product-text">
             <div class="stock">
               <span>Stock: {{ product.stock }}</span>
@@ -19,8 +19,8 @@
               </div>
             </div>
             <div class="card-footer">
-              <div class="wcf-left"><span class="price">€{{ product.price | number:'1.2-2' }}</span></div>
-              <div class="wcf-right">
+              <div class="price-container"><span class="price">€{{ product.price | number:'1.2-2' }}</span></div>
+              <div class="cart-button-container">
                 <button class="buy-btn" (click)="addToCart(product)">
                   <i class="fas fa-shopping-cart"></i>
                 </button>
