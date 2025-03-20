@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import jakarta.annotation.PostConstruct;
+
 
 import java.util.Optional;
 import java.util.List;
@@ -20,7 +22,6 @@ import java.util.List;
 public class UserServiceImplementation implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Value("${admin.email}")
     private String adminEmail;
@@ -32,9 +33,13 @@ public class UserServiceImplementation implements UserDetailsService {
     private String adminPassword;
 
     @Autowired
-    public UserServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+    }
+
+    @PostConstruct
+    public void init() {
+        createAdminAccount();
     }
 
     public void createAdminAccount() {
@@ -44,7 +49,7 @@ public class UserServiceImplementation implements UserDetailsService {
             admin.setUserRole(UserRole.ADMIN);
             admin.setEmail(adminEmail);
             admin.setName(adminName);
-            admin.setPassword(passwordEncoder.encode(adminPassword));
+            admin.setPassword(new BCryptPasswordEncoder().encode(adminPassword));
             userRepository.save(admin);
         }
     }
