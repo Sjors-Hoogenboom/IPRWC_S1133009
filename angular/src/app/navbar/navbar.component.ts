@@ -20,12 +20,12 @@ export class NavbarComponent implements OnInit {
     this.authService.isLoggedIn().subscribe(status => {
       this.isLoggedIn = status;
     });
-
     this.authService.getUsername().subscribe(name => {
       this.username = name;
     });
-    this.authService.hasRole('ADMIN').subscribe(isAdmin => {
-      this.isAdmin = isAdmin;
+    this.authService.getRole().subscribe(role => {
+      this.isAdmin = role === 'ADMIN';
+      console.log("Navbar updated, isAdmin:", this.isAdmin); // Debug log
     });
   }
 
