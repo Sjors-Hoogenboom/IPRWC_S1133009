@@ -41,19 +41,18 @@ export class CartService {
     }
 
     localStorage.setItem(this.cartKey, JSON.stringify(cart));
+    this.updateCartCount();
   }
 
   updateCart(cart: CartItem[]) {
     localStorage.setItem(this.cartKey, JSON.stringify(cart));
+    this.updateCartCount();
   }
 
   removeFromCart(productId: string) {
     let cart = this.getCart().filter(item => item.id !== productId);
     this.updateCart(cart);
-  }
-
-  clearCart() {
-    localStorage.removeItem(this.cartKey);
+    this.updateCartCount();
   }
 
   updateCartCount() {
