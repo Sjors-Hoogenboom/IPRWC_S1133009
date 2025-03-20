@@ -10,6 +10,10 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
+  getProducts(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+
   addProduct(product: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

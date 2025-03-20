@@ -38,18 +38,22 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {
     this.loadProducts();
-
     this.authService.hasRole('ADMIN').subscribe(isAdmin => {
       this.isAdmin = isAdmin;
     });
   }
 
   loadProducts() {
-    this.http.get<Product[]>('http://localhost:8080/api/products')
-      .subscribe(data => {
+    this.productService.getProducts().subscribe({
+      next: (data) => {
         this.products = data;
-      });
+      },
+      error: (error) => {
+        console.error("Error loading products:", error);
+      }
+    });
   }
+
 
   trackById(index: number, product: any): number {
     return product.id;
@@ -68,7 +72,13 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  addToCart(product: any) {
-    this.cartService.addToCart(product)
+  addToCart(product: Product) {
+    this.cartService.addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl || '',
+      quantity: 1
+    });
   }
 }
