@@ -23,8 +23,8 @@ public class SignupController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, String>> signupCustomer(@RequestBody SignupRequest signupRequest) {
-        boolean isUserCreated = authService.createCustomer(signupRequest);
+    public ResponseEntity<Map<String, String>> signupUser(@RequestBody SignupRequest signupRequest) {
+        boolean isUserCreated = authService.createUser(signupRequest);
 
         Map<String, String> response = new HashMap<>();
         if (isUserCreated) {

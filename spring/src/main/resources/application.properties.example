@@ -8,3 +8,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 
 jwt.secret={jwt_key_Base64}
+
+admin.email={admin email}
+admin.name={admin name}
+admin.password={admin password}

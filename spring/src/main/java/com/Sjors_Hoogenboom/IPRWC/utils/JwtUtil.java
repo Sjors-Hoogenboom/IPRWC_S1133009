@@ -1,5 +1,6 @@
 package com.Sjors_Hoogenboom.IPRWC.utils;
 
+import com.Sjors_Hoogenboom.IPRWC.enums.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -52,9 +53,10 @@ public class JwtUtil {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    public String generateToken(String email, String name) {
+    public String generateToken(String email, String name, UserRole userRole) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("name", name);
+        claims.put("role", userRole.name());
         return createToken(claims, email);
     }
 

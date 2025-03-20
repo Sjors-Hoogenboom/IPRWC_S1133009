@@ -1,8 +1,9 @@
 package com.Sjors_Hoogenboom.IPRWC.services;
 
 import com.Sjors_Hoogenboom.IPRWC.dto.SignupRequest;
-import com.Sjors_Hoogenboom.IPRWC.entities.Customer;
-import com.Sjors_Hoogenboom.IPRWC.repository.CustomerRepository;
+import com.Sjors_Hoogenboom.IPRWC.entities.User;
+import com.Sjors_Hoogenboom.IPRWC.enums.UserRole;
+import com.Sjors_Hoogenboom.IPRWC.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,27 +12,28 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImplementation implements AuthService {
 
-    private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthServiceImplementation(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
-        this.customerRepository = customerRepository;
+    public AuthServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public boolean createCustomer(SignupRequest signupRequest) {
-        if (customerRepository.existsByEmail(signupRequest.getEmail())) {
+    public boolean createUser(SignupRequest signupRequest) {
+        if (userRepository.existsByEmail(signupRequest.getEmail())) {
             return false;
         }
 
-        Customer customer = new Customer();
-        BeanUtils.copyProperties(signupRequest, customer);
+        User user = new User();
+        BeanUtils.copyProperties(signupRequest, user);
 
+        user.setUserRole(UserRole.USER);
         String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
-        customer.setPassword(hashedPassword);
-        customerRepository.save(customer);
+        user.setPassword(hashedPassword);
+        userRepository.save(user);
         return true;
     }
 }
