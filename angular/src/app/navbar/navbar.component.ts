@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import {RouterModule} from '@angular/router';
+import {CartService} from '../../services/cart.service';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   standalone: true,
   styleUrls: ['./navbar.component.scss']
 })
@@ -13,8 +15,9 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   username: string | null = null;
   isAdmin = false;
+  cartItemCount: number = 0;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private cartService: CartService) {}
 
   ngOnInit() {
     this.authService.isLoggedIn().subscribe(status => {
@@ -25,6 +28,9 @@ export class NavbarComponent implements OnInit {
     });
     this.authService.getRole().subscribe(role => {
       this.isAdmin = role === 'ADMIN';
+    });
+    this.cartService.getCartItemCount().subscribe(count => {
+      this.cartItemCount = count;
     });
   }
 

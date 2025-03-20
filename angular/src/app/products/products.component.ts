@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {CommonModule, DecimalPipe} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {ProductService} from '../../services/product.service';
+import {CartService} from '../../services/cart.service';
 
 interface Product {
   id: string;
@@ -31,7 +32,8 @@ export class ProductsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -67,6 +69,6 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(product: any) {
-    console.log("Added to cart:", product);
+    this.cartService.addToCart(product)
   }
 }
