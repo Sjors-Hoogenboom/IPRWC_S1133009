@@ -9,7 +9,7 @@
       <li><a routerLink="/login">Login</a></li>
     } @else {
       <li class="user-info">
-        <span>Welcome, {{ username }}</span>
+        <span>Welcome {{ username }}</span>
         <button class="logout-button" (click)="logout()">Logout</button>
       </li>
     }

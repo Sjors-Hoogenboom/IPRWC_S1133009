@@ -46,9 +46,9 @@ export class LoginComponent {
           this.message = 'Login successful! Redirecting...';
 
           localStorage.setItem('token', response.jwtToken);
-          this.authService.login(response.jwtToken);
 
           setTimeout(() => {
+            this.authService.login(response.jwtToken);
             this.router.navigate(['/']);
           }, 2000);
         }

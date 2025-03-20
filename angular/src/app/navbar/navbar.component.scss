@@ -5,6 +5,7 @@
   background-color: #3344AA;
   padding: 10px 20px;
   color: white;
+  height: 40px;
 
   .nav-links {
     display: flex;
@@ -43,5 +44,9 @@
     &:hover {
       background-color: #d48b00;
     }
+  }
+
+  .user-info > span {
+    margin-right: 10px;
   }
 }
