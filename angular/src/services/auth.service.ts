@@ -86,7 +86,7 @@ export class AuthService {
       this.username.next(payload.name || 'User');
       this.role.next(payload.role || 'USER');
     } catch (error) {
-      console.error('Error decoding token', error);
+      console.error(error);
       this.username.next(null);
       this.role.next(null);
     }
