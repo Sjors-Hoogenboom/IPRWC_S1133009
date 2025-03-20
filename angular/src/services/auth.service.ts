@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
   private username = new BehaviorSubject<string | null>(null);
   private role = new BehaviorSubject<string | null>(null);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient) {
     this.restoreAuthState()
   }
 
@@ -22,9 +23,15 @@ export class AuthService {
     return this.username.asObservable();
   }
 
-  hasRole(role: string): boolean {
-    return this.role.getValue() === role;
+  hasRole(role: string): Observable<boolean> {
+    const headers = {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    };
+
+    return this.http.get<boolean>(`http://localhost:8080/api/auth/has-role?role=${role}`, { headers });
   }
+
 
   login(jwtToken: string): void {
     localStorage.setItem('token', jwtToken);

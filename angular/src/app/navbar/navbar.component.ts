@@ -24,7 +24,9 @@ export class NavbarComponent implements OnInit {
     this.authService.getUsername().subscribe(name => {
       this.username = name;
     });
-    this.authService.hasRole('ADMIN') ? this.isAdmin = true : this.isAdmin = false;
+    this.authService.hasRole('ADMIN').subscribe(isAdmin => {
+      this.isAdmin = isAdmin;
+    });
   }
 
   logout() {
