@@ -7,6 +7,7 @@ import {LoginComponent} from './app/login/login.component';
 import {ProductsComponent} from './app/products/products.component';
 import {AddProductComponent} from './app/add-product/add-product.component';
 import {ShoppingCartComponent} from './app/shopping-cart/shopping-cart.component';
+import {AdminGuard} from './guards/admin.guard';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -15,7 +16,7 @@ bootstrapApplication(AppComponent, {
       { path: '', component: ProductsComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'add-product', component: AddProductComponent },
+      { path: 'add-product', component: AddProductComponent, canActivate: [AdminGuard] },
       { path: 'cart', component: ShoppingCartComponent },
       { path: '**', redirectTo: '' }
     ]),
