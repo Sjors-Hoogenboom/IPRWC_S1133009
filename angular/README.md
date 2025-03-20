@@ -2,6 +2,21 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
 
+# Webshop Application Features
+
+## Visitors
+- Can **register** an account.
+- Can **log in** with their registered account.
+- Can **add items to their cart**.
+- Can **purchase items**, reducing the stock.
+- Orders are **saved in the database**, linked to the customer's email.
+- Can **log out** of their account.
+
+## Admins
+- Can **add new products**.
+- Can **remove existing products**.
+
+
 ## Development server
 
 To start a local development server, run:
