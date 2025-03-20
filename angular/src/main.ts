@@ -5,6 +5,7 @@ import { RegisterComponent } from './app/register/register.component';
 import {provideHttpClient} from '@angular/common/http';
 import {LoginComponent} from './app/login/login.component';
 import {ProductsComponent} from './app/products/products.component';
+import {AddProductComponent} from './app/add-product/add-product.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -13,6 +14,7 @@ bootstrapApplication(AppComponent, {
       { path: '', component: ProductsComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'add-product', component: AddProductComponent },
       { path: '**', redirectTo: '' }
     ]),
   ]

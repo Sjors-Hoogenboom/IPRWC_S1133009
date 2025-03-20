@@ -2,10 +2,8 @@ package com.Sjors_Hoogenboom.IPRWC.controllers;
 
 import com.Sjors_Hoogenboom.IPRWC.entities.Products;
 import com.Sjors_Hoogenboom.IPRWC.services.ProductService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +21,11 @@ public class ProductController {
     @GetMapping
     public List<Products> getAllProducts() {
         return productService.getAllProducts();
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping
+    public Products addProduct(@RequestBody Products product) {
+        return productService.addProduct(product);
     }
 }
