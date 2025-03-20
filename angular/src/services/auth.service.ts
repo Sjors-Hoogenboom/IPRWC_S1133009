@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,7 @@ export class AuthService {
       'Content-Type': 'application/json'
     };
 
-    return this.http.get<boolean>(`http://localhost:8080/api/auth/has-role?role=${role}`, { headers }).pipe(
-      tap((isAdmin: boolean) => {
-        this.role.next(isAdmin ? role : null);
-      })
-    );
+    return this.http.get<boolean>(`${environment.apiUrl}/api/auth/has-role?role=${role}`, { headers });
   }
 
   login(jwtToken: string): void {

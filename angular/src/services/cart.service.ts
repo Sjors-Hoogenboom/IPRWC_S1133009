@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 interface CartItem {
   id: string;
@@ -17,7 +18,7 @@ interface CartItem {
 export class CartService {
   private cartKey = 'shopping_cart';
   private cartItemCount = new BehaviorSubject<number>(0);
-  private apiUrl = 'http://localhost:8080/api/orders';
+  private apiUrl = `${environment.apiUrl}/api/orders`;
 
   constructor(private http: HttpClient) {
     this.updateCartCount();
