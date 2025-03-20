@@ -12,3 +12,5 @@ jwt.secret={jwt_key_Base64}
 admin.email={admin email}
 admin.name={admin name}
 admin.password={admin password}
+
+cors.allowedOrigins=http://localhost:4200,http://domain.com

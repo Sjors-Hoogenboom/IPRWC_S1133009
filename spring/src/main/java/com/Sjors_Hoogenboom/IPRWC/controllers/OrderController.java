@@ -6,6 +6,7 @@ import com.Sjors_Hoogenboom.IPRWC.entities.Orders;
 import com.Sjors_Hoogenboom.IPRWC.services.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class OrderController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping
     public ResponseEntity<?> placeOrder(@RequestBody OrderRequest orderRequest) {
-        String customerEmail = orderRequest.getCustomerEmail();
+        String customerEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
         List<OrderItem> orderItems = orderRequest.getOrderItems().stream().map(dto -> {
             OrderItem item = new OrderItem();

@@ -2,6 +2,7 @@ package com.Sjors_Hoogenboom.IPRWC.configuration;
 
 import com.Sjors_Hoogenboom.IPRWC.filters.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,9 @@ import java.util.List;
 @EnableWebSecurity
 @EnableMethodSecurity()
 public class WebSecurityConfiguration {
+
+    @Value("${cors.allowedOrigins}")
+    private String[] allowedOrigins;
 
     private final JwtRequestFilter jwtRequestFilter;
 
@@ -65,7 +69,7 @@ public class WebSecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of(allowedOrigins));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         configuration.setAllowCredentials(true);
