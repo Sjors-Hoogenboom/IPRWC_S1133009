@@ -20,6 +20,11 @@ export class ProductService {
   }
 
   deleteProduct(productId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${productId}`);
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete<void>(`${this.apiUrl}/${productId}`, { headers });
   }
 }
