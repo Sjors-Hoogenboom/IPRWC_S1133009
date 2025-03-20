@@ -1,7 +1,7 @@
 package com.Sjors_Hoogenboom.IPRWC.services;
 
 import com.Sjors_Hoogenboom.IPRWC.dto.SignupRequest;
-import com.Sjors_Hoogenboom.IPRWC.entities.User;
+import com.Sjors_Hoogenboom.IPRWC.entities.Users;
 import com.Sjors_Hoogenboom.IPRWC.enums.UserRole;
 import com.Sjors_Hoogenboom.IPRWC.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
@@ -27,13 +27,13 @@ public class AuthServiceImplementation implements AuthService {
             return false;
         }
 
-        User user = new User();
-        BeanUtils.copyProperties(signupRequest, user);
+        Users users = new Users();
+        BeanUtils.copyProperties(signupRequest, users);
 
-        user.setUserRole(UserRole.USER);
+        users.setUserRole(UserRole.USER);
         String hashedPassword = passwordEncoder.encode(signupRequest.getPassword());
-        user.setPassword(hashedPassword);
-        userRepository.save(user);
+        users.setPassword(hashedPassword);
+        userRepository.save(users);
         return true;
     }
 }
