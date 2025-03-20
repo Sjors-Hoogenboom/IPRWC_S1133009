@@ -35,8 +35,7 @@ export class AuthService {
 
     return this.http.get<boolean>(`http://localhost:8080/api/auth/has-role?role=${role}`, { headers }).pipe(
       tap((isAdmin: boolean) => {
-        console.log(`Role check for ${role}:`, isAdmin); // Debug log
-        this.role.next(isAdmin ? role : null); // Explicitly set role
+        this.role.next(isAdmin ? role : null);
       })
     );
   }

@@ -25,7 +25,6 @@ export class NavbarComponent implements OnInit {
     });
     this.authService.getRole().subscribe(role => {
       this.isAdmin = role === 'ADMIN';
-      console.log("Navbar updated, isAdmin:", this.isAdmin); // Debug log
     });
   }
 
