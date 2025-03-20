@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 interface CartItem {
   id: string;
@@ -21,11 +22,18 @@ interface CartItem {
 })
 export class ShoppingCartComponent implements OnInit {
   cart: CartItem[] = [];
+  customerEmail: string | null = null;
+  orderStatus: string = '';
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,
+              private authService: AuthService,
+              private router: Router) {}
 
   ngOnInit() {
     this.loadCart();
+    this.authService.getUsername().subscribe(email => {
+      this.customerEmail = email;
+    });
   }
 
   loadCart() {
@@ -65,5 +73,23 @@ export class ShoppingCartComponent implements OnInit {
 
   trackById(index: number, item: any): string {
     return item.id;
+  }
+
+  placeOrder() {
+    if (!this.customerEmail) {
+      this.router.navigate(['/register']);
+      return;
+    }
+
+    this.cartService.placeOrder(this.customerEmail).subscribe({
+      next: () => {
+        this.orderStatus = 'Order placed successfully!';
+        this.cartService.clearCart();
+        this.cart = [];
+      },
+      error: () => {
+        this.orderStatus = 'Order failed. Please try again.';
+      }
+    });
   }
 }
