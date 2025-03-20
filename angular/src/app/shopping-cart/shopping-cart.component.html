@@ -1,1 +1,36 @@
-<p>shopping-cart works!</p>
+<div class="cart-container-wrapper">
+  <div class="cart-container" *ngIf="cart.length > 0; else emptyCart">
+    <h2>Shopping Cart</h2>
+
+    <div class="cart-item" *ngFor="let item of cart; trackBy: trackById">
+      <img [src]="item.imageUrl" [alt]="item.name" class="cart-item-image"/>
+
+      <div class="cart-item-details">
+        <h3>{{ item.name }}</h3>
+        <p>€{{ item.price | number:'1.2-2' }}</p>
+        <div class="quantity-controls">
+          <button (click)="decreaseQuantity(item)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="increaseQuantity(item)">+</button>
+        </div>
+        <p class="total-price">Total: €{{ (item.price * item.quantity) | number:'1.2-2' }}</p>
+      </div>
+
+      <button class="remove-btn" (click)="removeItem(item.id)">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+
+    <div class="cart-summary">
+      <h3 class="total-price-text">Total Price: €{{ getTotalPrice() | number:'1.2-2' }}</h3>
+      <button class="order-button">Order</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyCart>
+  <div class="empty-cart-container">
+    <p>Your shopping cart is empty.</p>
+    <button class="return-button" routerLink="/">Return to webshop</button>
+  </div>
+</ng-template>

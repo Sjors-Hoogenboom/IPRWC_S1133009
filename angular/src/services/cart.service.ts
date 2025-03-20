@@ -56,7 +56,7 @@ export class CartService {
     localStorage.removeItem(this.cartKey);
   }
 
-  private updateCartCount() {
+  updateCartCount() {
     const totalItems = this.getCart().reduce((count, item) => count + item.quantity, 0);
     this.cartItemCount.next(totalItems);
   }
