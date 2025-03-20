@@ -4,14 +4,16 @@ import { AppComponent } from './app/app.component';
 import { RegisterComponent } from './app/register/register.component';
 import {provideHttpClient} from '@angular/common/http';
 import {LoginComponent} from './app/login/login.component';
+import {ProductsComponent} from './app/products/products.component';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(),
     provideRouter([
-      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: '', component: ProductsComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
+      { path: '**', redirectTo: '' }
     ]),
   ]
 }).catch(err => console.error());

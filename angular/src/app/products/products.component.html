@@ -1,1 +1,30 @@
-<p>products works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let product of products; trackBy: trackById">
+      <div class="wsk-cp-product">
+        <div class="wsk-cp-img">
+          <img [src]="product.imageUrl" [alt]="product.name" class="img-responsive" />
+        </div>
+        <div class="wsk-cp-text">
+          <div class="stock">
+            <span>Stock: {{ product.stock }}</span>
+          </div>
+          <div class="title-product">
+            <h3>{{ product.name }}</h3>
+          </div>
+          <div class="description-prod">
+            <p>{{ product.description }}</p>
+          </div>
+          <div class="card-footer">
+            <div class="wcf-left"><span class="price">€{{ product.price | number:'1.2-2' }}</span></div>
+            <div class="wcf-right">
+              <button class="buy-btn" (click)="addToCart(product)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
