@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
     this.authService.getRole().subscribe(role => {
       this.isAdmin = role === 'ADMIN';
     });
-    this.cartService.getCartItemCount().subscribe(count => {
+    this.cartService.getCartCount().subscribe(count => {
       this.cartItemCount = count;
     });
   }
