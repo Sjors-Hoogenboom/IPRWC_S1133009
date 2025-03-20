@@ -1,6 +1,12 @@
 <nav class="navbar">
   <div class="nav-links">
     <a routerLink="/">Home</a>
+
+    @if (isAdmin) {
+      <li>
+        <a routerLink="/add-product" class="add-product-button">Add Product</a>
+      </li>
+    }
   </div>
 
   <ul class="auth-buttons">
@@ -11,12 +17,6 @@
       <li class="users-info">
         <span class="welcome-user">Welcome {{ username }}</span>
         <button class="logout-button" (click)="logout()">Logout</button>
-      </li>
-    }
-
-    @if (isAdmin) {
-      <li>
-        <a routerLink="/add-product" class="add-product-button">Add Product</a>
       </li>
     }
   </ul>
