@@ -83,9 +83,11 @@ export class ShoppingCartComponent implements OnInit {
 
     this.cartService.placeOrder(this.customerEmail).subscribe({
       next: () => {
-        this.orderStatus = 'Order placed successfully!';
-        this.cartService.clearCart();
-        this.cart = [];
+        this.orderStatus = 'Order placed successfully! (Stock lowered and saved in db)';
+        setTimeout(() => {
+          this.cartService.clearCart();
+          this.cart = [];
+        }, 10000)
       },
       error: () => {
         this.orderStatus = 'Order failed. Please try again.';

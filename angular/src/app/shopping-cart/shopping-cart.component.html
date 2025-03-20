@@ -23,8 +23,8 @@
 
     <div class="cart-summary">
       <h3 class="total-price-text">Total Price: €{{ getTotalPrice() | number:'1.2-2' }}</h3>
-      <button class="order-button" (click)="placeOrder()">Order</button>
       <p *ngIf="orderStatus" class="order-message">{{ orderStatus }}</p>
+      <button class="order-button" (click)="placeOrder()">Order</button>
     </div>
   </div>
 </div>
