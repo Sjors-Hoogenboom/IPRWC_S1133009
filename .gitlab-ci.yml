@@ -8,6 +8,7 @@ verify:
   stage: verify
   image: gradle:8-jdk21
   script:
+    - cd ./angular/
     - gradle checkstyleMain checkstyleTest
   only:
     - master
