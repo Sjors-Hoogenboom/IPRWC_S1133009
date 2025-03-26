@@ -13,5 +13,6 @@ describe('Register flow', () => {
     cy.get('button').contains("Register").click()
 
     cy.get('*[class^="success-message"]').should('contain', 'Account created successfully!')
+
   })
 })
