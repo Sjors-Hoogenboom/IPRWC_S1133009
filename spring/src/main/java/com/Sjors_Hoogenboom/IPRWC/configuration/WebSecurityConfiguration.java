@@ -70,7 +70,6 @@ public class WebSecurityConfiguration {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(allowedOrigins));
-        configuration.setAllowedOrigins(List.of("http://209.38.36.165", "http://iprwc-s1133009.nl", "http://www.iprwc-s1133009.nl", "http://api.iprwc-s1133009.nl"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         configuration.setAllowCredentials(true);
