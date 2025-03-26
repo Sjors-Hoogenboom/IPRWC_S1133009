@@ -1,0 +1,32 @@
+stages:
+  - verify
+  - test
+  - build
+  - deploy
+
+verify:
+  stage: verify
+  image: gradle:8-jdk21
+  script:
+    - gradle checkstyleMain checkstyleTest
+  only:
+    - main
+
+test:
+  stage: test
+  image: gradle:8-jdk21
+  script:
+    - gradle test
+  only:
+    - main
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t frontend-angular ./frontend
+    - docker build -t backend-spring ./backend
+  only:
+    - main
