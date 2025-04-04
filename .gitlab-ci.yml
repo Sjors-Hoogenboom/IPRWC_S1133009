@@ -31,3 +31,4 @@ build:
     - docker build -t backend-spring ./backend
   only:
     - master
+
