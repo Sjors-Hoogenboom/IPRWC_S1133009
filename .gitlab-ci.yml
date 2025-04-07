@@ -36,6 +36,12 @@ test-backend:
     - cd spring
     - mvn test
 
+test-frontend:
+  stage: test
+  image: node:20
+  script:
+    - cd angular
+
 build:
   stage: build
   image: docker:latest
