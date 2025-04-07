@@ -10,14 +10,24 @@ verify-frontend:
   script:
     - cd ./angular/
     - npm ci
-    - npm run lint || true
+    - npm run lint
+  allow_failure: true
+  artifacts:
+    when: always
+    paths:
+      - angular/.eslintcache
 
 verify-backend:
   stage: verify
   image: maven:3.9.9-amazoncorretto
   script:
     - cd ./spring/
-    - mvn checkstyle:check || true
+    - mvn checkstyle:check
+  allow_failure: true
+  artifacts:
+    when: always
+    paths:
+      - spring/target
 
 test-backend:
   stage: test
