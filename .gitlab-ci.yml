@@ -8,7 +8,7 @@ verify-frontend:
   stage: verify
   image: node:20
   script:
-    - cd ./angular/
+    - cd angular
     - npm ci
     - npm run lint
   allow_failure: true
@@ -21,7 +21,7 @@ verify-backend:
   stage: verify
   image: maven:3.9.9-amazoncorretto
   script:
-    - cd ./spring/
+    - cd spring
     - mvn checkstyle:check
   allow_failure: true
   artifacts:
@@ -33,7 +33,7 @@ test-backend:
   stage: test
   image: maven:3.9.9-amazoncorretto
   script:
-    - cd ./spring/
+    - cd spring
     - mvn test
 
 build:
