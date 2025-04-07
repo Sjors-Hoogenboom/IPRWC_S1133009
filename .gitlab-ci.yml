@@ -1,0 +1,31 @@
+stages:
+  - verify
+  - test
+  - build
+  - deploy
+
+verify:
+  stage: verify
+  image: node:20
+  script:
+    - cd ./angular/
+    - npm ci
+    - npm run lint
+
+test:
+  stage: test
+  image: maven:3.9.9-amazoncorretto
+  script:
+    - mvn test
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t frontend-angular ./frontend
+    - docker build -t backend-spring ./backend
+  only:
+    - master
+
