@@ -4,13 +4,20 @@ stages:
   - build
   - deploy
 
-verify:
+verify-frontend:
   stage: verify
   image: node:20
   script:
     - cd ./angular/
     - npm ci
     - npm run lint || true
+
+verify-backend:
+  stage: verify
+  image: maven:3.9.9-amazoncorretto
+  script:
+    - cd ./spring/
+    - mvn checkstyle:check || true
 
 test:
   stage: test
