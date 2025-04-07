@@ -19,7 +19,7 @@ verify-frontend:
 
 verify-backend:
   stage: verify
-  image: maven:3.9.9-amazoncorretto
+  image: maven:3.9.9-amazoncorretto-21
   script:
     - cd spring
     - mvn checkstyle:check
@@ -31,7 +31,7 @@ verify-backend:
 
 test-backend:
   stage: test
-  image: maven:3.9.9-amazoncorretto
+  image: maven:3.9.9-amazoncorretto-21
   script:
     - cd spring
     - mvn test
