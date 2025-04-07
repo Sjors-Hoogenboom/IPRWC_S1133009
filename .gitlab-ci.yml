@@ -9,6 +9,7 @@ verify-frontend:
   image: node:20
   script:
     - cd ./angular/
+    - npm ci
     - npm run lint || true
 
 verify-backend:
@@ -18,10 +19,11 @@ verify-backend:
     - cd ./spring/
     - mvn checkstyle:check || true
 
-test:
+test-backend:
   stage: test
   image: maven:3.9.9-amazoncorretto
   script:
+    - cd ./spring/
     - mvn test
 
 build:
