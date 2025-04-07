@@ -9,7 +9,6 @@ verify-frontend:
   image: node:20
   script:
     - cd ./angular/
-    - npm ci
     - npm run lint || true
 
 verify-backend:
