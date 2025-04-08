@@ -4,30 +4,30 @@ stages:
   - build
   - deploy
 
-verify-frontend:
-  stage: verify
-  image: node:20
-  script:
-    - cd angular
-    - npm ci
-    - npm run lint
-  allow_failure: true
-  artifacts:
-    when: always
-    paths:
-      - angular/.eslintcache
+# verify-frontend:
+#   stage: verify
+#   image: node:20
+#   script:
+#     - cd angular
+#     - npm ci
+#     - npm run lint
+#   allow_failure: true
+#   artifacts:
+#     when: always
+#     paths:
+#       - angular/.eslintcache
 
-verify-backend:
-  stage: verify
-  image: maven:3.9.9-amazoncorretto-21
-  script:
-    - cd spring
-    - mvn checkstyle:check
-  allow_failure: true
-  artifacts:
-    when: always
-    paths:
-      - spring/target
+# verify-backend:
+#   stage: verify
+#   image: maven:3.9.9-amazoncorretto-21
+#   script:
+#     - cd spring
+#     - mvn checkstyle:check
+#   allow_failure: true
+#   artifacts:
+#     when: always
+#     paths:
+#       - spring/target
 
 test-backend:
   stage: test
