@@ -83,6 +83,7 @@ build-backend:
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - cd spring
+    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - mvn clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$CI_PROJECT_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$CI_PROJECT_PATH/backend-spring
