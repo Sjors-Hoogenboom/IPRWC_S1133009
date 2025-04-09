@@ -4,6 +4,13 @@ stages:
   - build
   - deploy
 
+variables:
+  IMAGE_NAME_BACKEND: sjorsnl77/pipeline_ipsenh-backend
+  IMAGE_NAME_FRONTEND: sjorsnl77/pipeline_ipsenh-frontend
+  IMAGE_TAG: ipsenh-app-1.0
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
 # verify-frontend:
 #   stage: verify
 #   image: node:20
@@ -60,23 +67,24 @@ build-frontend:
   image: docker:latest
   services:
     - docker:dind
+  before_script:
+  - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
-    - docker build -t frontend-angular ./angular
+    - docker build -t registry.inf-hsleiden.nl/$CI_PROJECT_PATH/frontend-angular ./angular
+    - docker push registry.inf-hsleiden.nl/$CI_PROJECT_PATH/frontend-angular
   only:
     - master
 
-build-backend:
-  stage: build
-  image: docker:24.0.7-cli
-  services:
-    - docker:dind
-  variables:
-    DOCKER_TLS_CERTDIR: ""
-  before_script:
-    - apt-get install -y maven openjdk-21-jdk
-  script:
-    - cd spring
-    - mvn clean package -DskipTests
-    - docker build -t backend-spring .
-  only:
-    - master
+# build-backend:
+#   stage: build
+#   image: docker:24.0.7-cli
+#   services:
+#     - docker:dind
+#   before_script:
+#     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+#   script:
+#     - cd spring
+#     - mvn clean package -DskipTests
+#     - docker build -t backend-spring .
+#   only:
+#     - master
