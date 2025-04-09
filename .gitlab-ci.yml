@@ -40,6 +40,9 @@ test-backend:
     MYSQL_DATABASE: $MYSQL_DATABASE
     SPRING_JWT_SECRET: $JWT_SECRET
     CORS_ALLOWEDORIGINS: "*"
+    ADMIN_EMAIL: $ADMIN_EMAIL
+    ADMIN_NAME: $ADMIN_NAME
+    ADMIN_PASSWORD: $ADMIN_PASSWORD
   script:
     - cd spring
     - mvn test
