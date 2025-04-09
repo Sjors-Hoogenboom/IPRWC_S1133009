@@ -53,7 +53,7 @@ test-frontend:
   script:
     - cd angular
     - npm ci
-    - npx ng test --watch=false --browsers=ChromeHeadless
+    - npx ng test --watch=false --browsers=ChromeHeadless --no-sandbox
 
 build:
   stage: build
