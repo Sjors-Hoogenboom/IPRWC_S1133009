@@ -55,14 +55,22 @@ stages:
 #     - npm ci
 #     - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
 
-build:
+build-frontend:
   stage: build
   image: docker:latest
   services:
     - docker:dind
   script:
     - docker build -t frontend-angular ./angular
-    - docker build -t backend-spring ./spring
   only:
     - master
 
+build-backend:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t backend-spring ./spring
+  only:
+    - master
