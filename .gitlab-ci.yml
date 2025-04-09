@@ -14,7 +14,7 @@ variables:
 #   script:
 #     - cd angular
 #     - npm ci
-#     - npm run lint
+#     - npm run lint 
 #   allow_failure: true
 #   artifacts:
 #     when: always
@@ -79,9 +79,12 @@ build-backend:
   services:
     - docker:dind
   before_script:
+    - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - cd spring
-    - docker build -t backend-spring .
+    - mvn clean package -DskipTests
+    - docker build -t registry.inf-hsleiden.nl/$CI_PROJECT_PATH/backend-spring .
+    - docker push registry.inf-hsleiden.nl/$CI_PROJECT_PATH/backend-spring
   only:
     - master
