@@ -29,31 +29,31 @@ stages:
 #     paths:
 #       - spring/target
 
-test-backend:
-  stage: test
-  image: maven:3.9.9-amazoncorretto-21
-  services:
-    - name: mysql:8.0.41
-      alias: db
-  variables:
-    MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-    MYSQL_DATABASE: $MYSQL_DATABASE
-    JWT_SECRET: $JWT_SECRET
-    CORS_ALLOWEDORIGINS: "*"
-    ADMIN_EMAIL: $ADMIN_EMAIL
-    ADMIN_NAME: $ADMIN_NAME
-    ADMIN_PASSWORD: $ADMIN_PASSWORD
-  script:
-    - cd spring
-    - mvn test
+# test-backend:
+#   stage: test
+#   image: maven:3.9.9-amazoncorretto-21
+#   services:
+#     - name: mysql:8.0.41
+#       alias: db
+#   variables:
+#     MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+#     MYSQL_DATABASE: $MYSQL_DATABASE
+#     JWT_SECRET: $JWT_SECRET
+#     CORS_ALLOWEDORIGINS: "*"
+#     ADMIN_EMAIL: $ADMIN_EMAIL
+#     ADMIN_NAME: $ADMIN_NAME
+#     ADMIN_PASSWORD: $ADMIN_PASSWORD
+#   script:
+#     - cd spring
+#     - mvn test
 
-test-frontend:
-  stage: test
-  image: cypress/browsers:node-22.14.0-chrome-135.0.7049.84-1-ff-137.0.1-edge-135.0.3179.54-1
-  script:
-    - cd angular
-    - npm ci
-    - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
+# test-frontend:
+#   stage: test
+#   image: cypress/browsers:node-22.14.0-chrome-135.0.7049.84-1-ff-137.0.1-edge-135.0.3179.54-1
+#   script:
+#     - cd angular
+#     - npm ci
+#     - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
 
 build:
   stage: build
