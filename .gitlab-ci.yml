@@ -73,16 +73,16 @@ build-frontend:
   only:
     - master
 
-# build-backend:
-#   stage: build
-#   image: docker:24.0.7-cli
-#   services:
-#     - docker:dind
-#   before_script:
-#     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-#   script:
-#     - cd spring
-#     - mvn clean package -DskipTests
-#     - docker build -t backend-spring .
-#   only:
-#     - master
+build-backend:
+  stage: build
+  image: docker:24.0.7-cli
+  services:
+    - docker:dind
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - cd spring
+    - mvn clean package -DskipTests
+    - docker build -t backend-spring .
+  only:
+    - master
