@@ -59,16 +59,15 @@ build-frontend:
   stage: build
   image: docker:latest
   services:
-    - cd angular
     - docker:dind
   script:
-    - docker build -t frontend-angular .
+    - docker build -t frontend-angular ./angular
   only:
     - master
 
 build-backend:
   stage: build
-  image: carlossg/docker-maven:3.9.9-amazoncorretto-21
+  image: maven:3.9.9-amazoncorretto-21
   services:
     - docker:dind
   script:
