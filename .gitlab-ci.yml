@@ -52,6 +52,7 @@ test-frontend:
   image: node:20
   script:
     - cd angular
+    - npm ci
     - ng test --watch=false
 
 build:
