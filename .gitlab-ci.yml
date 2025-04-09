@@ -59,9 +59,10 @@ build-frontend:
   stage: build
   image: docker:latest
   services:
+    - cd angular
     - docker:dind
   script:
-    - docker build -t frontend-angular ./angular
+    - docker build -t frontend-angular .
   only:
     - master
 
