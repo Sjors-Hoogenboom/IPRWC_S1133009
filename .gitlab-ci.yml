@@ -71,7 +71,7 @@ build-backend:
   services:
     - docker:dind
   script:
-    - ./mvnw clean package -DskipTests
+    - mvn clean package -DskipTests
     - docker build -t backend-spring ./spring
   only:
     - master
