@@ -73,7 +73,7 @@ build-backend:
   variables:
     DOCKER_TLS_CERTDIR: ""
   script:
-    - yum install -y docker.io
+    - yum install -y docker
     - cd spring
     - mvn clean package -DskipTests
     - docker build -t backend-spring .
