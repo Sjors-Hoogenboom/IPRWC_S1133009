@@ -38,6 +38,7 @@ test-backend:
   variables:
     MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
     MYSQL_DATABASE: $MYSQL_DATABASE
+    SPRING_JWT_SECRET: $SPRING_JWT_SECRET
   script:
     - cd spring
     - mvn test
