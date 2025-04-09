@@ -62,7 +62,7 @@ build:
     - docker:dind
   script:
     - docker build -t frontend-angular ./angular
-    - docker build -t backend-spring ./backend
+    - docker build -t backend-spring ./spring
   only:
     - master
 
