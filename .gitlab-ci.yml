@@ -53,7 +53,7 @@ test-frontend:
   script:
     - cd angular
     - npm ci
-    - ng test --watch=false
+    - npx ng test --watch=false
 
 build:
   stage: build
