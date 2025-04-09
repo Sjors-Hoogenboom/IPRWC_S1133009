@@ -49,7 +49,7 @@ test-backend:
 
 test-frontend:
   stage: test
-  image: node:20
+  image: cypress/browsers:node20.8.0-chrome118-ff118
   script:
     - cd angular
     - npm ci
