@@ -82,7 +82,6 @@ build-backend:
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - cd spring
-    - mvn clean package -DskipTests
     - docker build -t backend-spring .
   only:
     - master
