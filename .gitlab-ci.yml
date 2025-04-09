@@ -67,13 +67,14 @@ build-frontend:
 
 build-backend:
   stage: build
-  image: maven:3.9.9-amazoncorretto-21
+  image: docker:24.0.7-cli
   services:
     - docker:dind
   variables:
     DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - apt-get install -y maven openjdk-21-jdk
   script:
-    - yum install -y docker
     - cd spring
     - mvn clean package -DskipTests
     - docker build -t backend-spring .
