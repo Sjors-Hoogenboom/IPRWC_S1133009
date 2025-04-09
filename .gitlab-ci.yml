@@ -67,8 +67,9 @@ build-frontend:
   before_script:
   - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
-    - docker build -t registry.inf-hsleiden.nl/$CI_PROJECT_PATH/frontend-angular ./angular
-    - docker push registry.inf-hsleiden.nl/$CI_PROJECT_PATH/frontend-angular
+    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
+    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
   only:
     - master
 
