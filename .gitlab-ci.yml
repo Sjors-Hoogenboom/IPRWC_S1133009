@@ -61,7 +61,7 @@ variables:
 
 build-frontend:
   stage: build
-  image: docker:latest
+  image: docker:28.0.7.cli
   services:
     - docker:dind
   before_script:
