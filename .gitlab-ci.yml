@@ -9,6 +9,7 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   DOCKER_CLIENT_TIMEOUT: 180
   COMPOSE_HTTP_TIMEOUT: 180
+  MAVEN_USER_HOME: "$CI_PROJECT_DIR/.m2"
 
 verify-frontend:
   stage: verify
@@ -33,7 +34,7 @@ verify-backend:
   cache:
     key: maven-cache
     paths:
-      - spring/.m2/repository
+      - .m2/repository
   script:
     - cd spring
     - mvn checkstyle:check
@@ -49,7 +50,7 @@ test-backend:
   cache:
     key: maven-cache
     paths:
-      - spring/.m2/repository
+      - .m2/repository
   services:
     - name: mysql:8.0.41
       alias: db
@@ -103,7 +104,7 @@ build-backend:
   cache:
     key: maven-cache
     paths:
-      - spring/.m2/repository
+      - .m2/repository
   before_script:
     - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
