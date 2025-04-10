@@ -70,6 +70,9 @@ build-frontend:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
+  cache:
+    paths:
+    - .m2/repository
   only:
     - master
 
@@ -87,6 +90,10 @@ build-backend:
     - mvn clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
+  cache:
+    key: node-modules
+    paths:
+    - angular/node_modules/
   only:
     - master
 
