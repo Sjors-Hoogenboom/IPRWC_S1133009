@@ -93,7 +93,7 @@ build-backend:
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   cache:
     paths:
-    - spring/.m2/repository
+    - .m2/repository
   only:
     - master
 
