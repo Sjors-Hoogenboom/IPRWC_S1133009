@@ -13,10 +13,14 @@ variables:
 verify-frontend:
   stage: verify
   image: node:20
+  cache:
+    key: node-modules
+    paths:
+      - angular/node_modules/
   script:
     - cd angular
     - npm ci
-    - npm run lint 
+    - npm run lint
   allow_failure: true
   artifacts:
     when: always
@@ -26,6 +30,10 @@ verify-frontend:
 verify-backend:
   stage: verify
   image: maven:3.9.9-amazoncorretto-21
+  cache:
+    key: maven-cache
+    paths:
+      - .m2/repository
   script:
     - cd spring
     - mvn checkstyle:check
@@ -38,6 +46,10 @@ verify-backend:
 test-backend:
   stage: test
   image: maven:3.9.9-amazoncorretto-21
+  cache:
+    key: maven-cache
+    paths:
+      - .m2/repository
   services:
     - name: mysql:8.0.41
       alias: db
@@ -56,6 +68,10 @@ test-backend:
 test-frontend:
   stage: test
   image: cypress/browsers:node-22.14.0-chrome-135.0.7049.84-1-ff-137.0.1-edge-135.0.3179.54-1
+  cache:
+    key: node-modules
+    paths:
+      - angular/node_modules/
   script:
     - cd angular
     - npm ci
@@ -66,16 +82,16 @@ build-frontend:
   image: docker:24.0.7-cli
   services:
     - docker:dind
+  cache:
+    key: node-modules
+    paths:
+      - angular/node_modules/
   before_script:
   - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
-  cache:
-    key: node-modules
-    paths:
-    - angular/node_modules/
   only:
     - master
 
@@ -84,6 +100,10 @@ build-backend:
   image: docker:24.0.7-cli
   services:
     - docker:dind
+  cache:
+    key: maven-cache
+    paths:
+      - .m2/repository
   before_script:
     - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
@@ -93,10 +113,6 @@ build-backend:
     - mvn clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
-  cache:
-    key: maven-cache
-    paths:
-      - spring/.m2/repository
   only:
     - master
 
