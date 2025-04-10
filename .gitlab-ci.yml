@@ -83,10 +83,6 @@ build-frontend:
   image: docker:24.0.7-cli
   services:
     - docker:dind
-  cache:
-    key: node-modules
-    paths:
-      - angular/node_modules/
   before_script:
   - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
