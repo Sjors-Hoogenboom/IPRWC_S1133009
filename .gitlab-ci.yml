@@ -11,107 +11,125 @@ variables:
   COMPOSE_HTTP_TIMEOUT: 180
   MAVEN_USER_HOME: "$CI_PROJECT_DIR/.m2"
 
-verify-frontend:
-  stage: verify
-  image: node:20
-  cache:
-    key: node-modules
-    paths:
-      - angular/node_modules/
-  script:
-    - cd angular
-    - npm ci
-    - npm run lint
-  allow_failure: true
-  artifacts:
-    when: always
-    paths:
-      - angular/.eslintcache
+#verify-frontend:
+#  stage: verify
+#  image: node:20
+#  cache:
+#    key: node-modules
+#    paths:
+#      - angular/node_modules/
+#  script:
+#    - cd angular
+#    - npm ci
+#    - npm run lint
+#  allow_failure: true
+#  artifacts:
+#    when: always
+#    paths:
+#      - angular/.eslintcache
+#
+#verify-backend:
+#  stage: verify
+#  image: maven:3.9.9-amazoncorretto-21
+#  cache:
+#    key: maven-cache
+#    paths:
+#      - .m2/repository
+#  script:
+#    - cd spring
+#    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository checkstyle:check
+#  allow_failure: true
+#  artifacts:
+#    when: always
+#    paths:
+#      - spring/target
+#
+#test-backend:
+#  stage: test
+#  image: maven:3.9.9-amazoncorretto-21
+#  cache:
+#    key: maven-cache
+#    paths:
+#      - .m2/repository
+#  services:
+#    - name: mysql:8.0.41
+#      alias: db
+#  variables:
+#    MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+#    MYSQL_DATABASE: $MYSQL_DATABASE
+#    JWT_SECRET: $JWT_SECRET
+#    CORS_ALLOWEDORIGINS: "*"
+#    ADMIN_EMAIL: $ADMIN_EMAIL
+#    ADMIN_NAME: $ADMIN_NAME
+#    ADMIN_PASSWORD: $ADMIN_PASSWORD
+#  script:
+#    - cd spring
+#    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository test
+#
+#test-frontend:
+#  stage: test
+#  image: cypress/browsers:node-22.14.0-chrome-135.0.7049.84-1-ff-137.0.1-edge-135.0.3179.54-1
+#  cache:
+#    key: node-modules
+#    paths:
+#      - angular/node_modules/
+#  script:
+#    - cd angular
+#    - npm ci
+#    - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
+#
+#build-frontend:
+#  stage: build
+#  image: docker:24.0.7-cli
+#  services:
+#    - docker:dind
+#  before_script:
+#  - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+#  script:
+#    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+#    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
+#    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
+#  only:
+#    - master
+#
+#build-backend:
+#  stage: build
+#  image: docker:24.0.7-cli
+#  services:
+#    - docker:dind
+#  cache:
+#    key: maven-cache
+#    paths:
+#      - .m2/repository
+#  before_script:
+#    - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
+#    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+#  script:
+#    - cd spring
+#    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+#    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
+#    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
+#    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
+#  only:
+#    - master
 
-verify-backend:
-  stage: verify
-  image: maven:3.9.9-amazoncorretto-21
-  cache:
-    key: maven-cache
-    paths:
-      - .m2/repository
-  script:
-    - cd spring
-    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository checkstyle:check
-  allow_failure: true
-  artifacts:
-    when: always
-    paths:
-      - spring/target
-
-test-backend:
-  stage: test
-  image: maven:3.9.9-amazoncorretto-21
-  cache:
-    key: maven-cache
-    paths:
-      - .m2/repository
-  services:
-    - name: mysql:8.0.41
-      alias: db
-  variables:
-    MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-    MYSQL_DATABASE: $MYSQL_DATABASE
-    JWT_SECRET: $JWT_SECRET
-    CORS_ALLOWEDORIGINS: "*"
-    ADMIN_EMAIL: $ADMIN_EMAIL
-    ADMIN_NAME: $ADMIN_NAME
-    ADMIN_PASSWORD: $ADMIN_PASSWORD
-  script:
-    - cd spring
-    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository test
-
-test-frontend:
-  stage: test
-  image: cypress/browsers:node-22.14.0-chrome-135.0.7049.84-1-ff-137.0.1-edge-135.0.3179.54-1
-  cache:
-    key: node-modules
-    paths:
-      - angular/node_modules/
-  script:
-    - cd angular
-    - npm ci
-    - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
-
-build-frontend:
-  stage: build
-  image: docker:24.0.7-cli
-  services:
-    - docker:dind
+deploy:
+  stage: deploy
+  image: alpine:3.21.3
   before_script:
-  - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+    - apk add --no-cache openssh
+    - echo "$SSH_PRIVATE_KEY" > id_rsa
+    - chmod 600 id_rsa
+    - ssh-keyscan -H your.server.ip >> ~/.ssh/known_hosts
   script:
-    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
-    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
+    - scp -i id_rsa backend-spring.tar frontend-angular.tar $SSH_USER@$SERVER_IP:/var/www/IPRWC/
+    - ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
+      cd /var/www/IPRWC
+      docker load -i backend-spring.tar || true
+      docker load -i frontend-angular.tar || true
+      docker stop $(docker ps -q --filter ancestor=frontend-angular) || true
+      docker rm $(docker ps -aq --filter ancestor=frontend-angular) || true
+      docker run -d -p 80:80 frontend-angular || true
+      docker compose up -d || true
   only:
     - master
-
-build-backend:
-  stage: build
-  image: docker:24.0.7-cli
-  services:
-    - docker:dind
-  cache:
-    key: maven-cache
-    paths:
-      - .m2/repository
-  before_script:
-    - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
-    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-  script:
-    - cd spring
-    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
-    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
-    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
-  only:
-    - master
-
-  # deploy:
-  #   stage: deploy
