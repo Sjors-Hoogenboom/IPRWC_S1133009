@@ -89,3 +89,6 @@ build-backend:
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   only:
     - master
+
+  # deploy:
+  #   stage: deploy
