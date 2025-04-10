@@ -71,8 +71,9 @@ build-frontend:
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
   cache:
+    key: node-modules
     paths:
-    - .m2/repository
+    - angular/node_modules/
   only:
     - master
 
@@ -91,9 +92,8 @@ build-backend:
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   cache:
-    key: node-modules
     paths:
-    - angular/node_modules/
+    - spring/.m2/repository
   only:
     - master
 
