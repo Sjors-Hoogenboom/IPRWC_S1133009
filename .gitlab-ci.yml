@@ -120,7 +120,8 @@ deploy:
     - apk add --no-cache openssh
     - echo "$SSH_PRIVATE_KEY" > id_rsa
     - chmod 600 id_rsa
-    - ssh-keyscan -H your.server.ip >> ~/.ssh/authorized_keys
+    - mkdir -p ~/.ssh
+    - ssh-keyscan -H $SERVER_IP >> ~/.ssh/authorized_keys
   script:
     - scp -i id_rsa backend-spring.tar frontend-angular.tar $SSH_USER@$SERVER_IP:/var/www/IPRWC/
     - ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
