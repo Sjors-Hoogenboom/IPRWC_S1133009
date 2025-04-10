@@ -94,8 +94,9 @@ build-backend:
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   cache:
+    key: maven-cache
     paths:
-    - .m2/repository
+      - spring/.m2/repository
   only:
     - master
 
