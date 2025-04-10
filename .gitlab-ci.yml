@@ -34,10 +34,10 @@ verify-backend:
   cache:
     key: maven-cache
     paths:
-      - /root/.m2/repository
+      - .m2/repository
   script:
     - cd spring
-    - mvn checkstyle:check
+    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository checkstyle:check
   allow_failure: true
   artifacts:
     when: always
