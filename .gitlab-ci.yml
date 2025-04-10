@@ -34,7 +34,7 @@ verify-backend:
   cache:
     key: maven-cache
     paths:
-      - .m2/repository
+      - /root/.m2/repository
   script:
     - cd spring
     - mvn checkstyle:check
@@ -50,7 +50,7 @@ test-backend:
   cache:
     key: maven-cache
     paths:
-      - .m2/repository
+      - /root/.m2/repository
   services:
     - name: mysql:8.0.41
       alias: db
@@ -104,7 +104,7 @@ build-backend:
   cache:
     key: maven-cache
     paths:
-      - .m2/repository
+      - /root/.m2/repository
   before_script:
     - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
