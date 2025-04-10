@@ -50,7 +50,7 @@ test-backend:
   cache:
     key: maven-cache
     paths:
-      - /root/.m2/repository
+      - .m2/repository
   services:
     - name: mysql:8.0.41
       alias: db
@@ -64,7 +64,7 @@ test-backend:
     ADMIN_PASSWORD: $ADMIN_PASSWORD
   script:
     - cd spring
-    - mvn test
+    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository test
 
 test-frontend:
   stage: test
@@ -104,14 +104,14 @@ build-backend:
   cache:
     key: maven-cache
     paths:
-      - /root/.m2/repository
+      - .m2/repository
   before_script:
     - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
     - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
   script:
     - cd spring
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-    - mvn clean package -DskipTests
+    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   only:
