@@ -20,7 +20,7 @@ import {ProductService} from '../../services/product.service';
 export class AddProductComponent {
   addProductForm!: FormGroup;
   status: 'idle' | 'success' | 'error' = 'idle';
-  message: string = '';
+  message = '';
 
   constructor(
     private productService: ProductService,
@@ -43,7 +43,7 @@ export class AddProductComponent {
     this.status = 'idle';
     this.message = '';
 
-    let formData = { ...this.addProductForm.value };
+    const formData = { ...this.addProductForm.value };
     formData.price = formData.price.toString().replace(',', '.');
 
     this.productService.addProduct(formData).subscribe({

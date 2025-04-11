@@ -24,7 +24,7 @@ import {CommonModule} from '@angular/common';
 export class RegisterComponent{
   registerForm!: FormGroup;
   status: 'idle' | 'success' | 'error' = 'idle';
-  message: string = '';
+  message = '';
 
   constructor(
     private service: JwtService,

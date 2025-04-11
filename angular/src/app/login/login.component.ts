@@ -19,7 +19,7 @@ import {AuthService} from '../../services/auth.service';
 export class LoginComponent {
   loginForm!: FormGroup;
   status: 'idle' | 'success' | 'error' = 'idle';
-  message: string = '';
+  message = '';
 
   constructor(
     private service: JwtService,

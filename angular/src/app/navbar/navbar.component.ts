@@ -12,10 +12,10 @@ import {CommonModule} from '@angular/common';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
   username: string | null = null;
   isAdmin = false;
-  cartItemCount: number = 0;
+  cartItemCount = 0;
 
   constructor(private authService: AuthService, private cartService: CartService) {}
 

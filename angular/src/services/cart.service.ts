@@ -33,7 +33,7 @@ export class CartService {
   }
 
   addToCart(product: CartItem) {
-    let cart = this.getCart();
+    const cart = this.getCart();
     const existingItem = cart.find(item => item.id === product.id);
 
     if (existingItem) {
@@ -55,7 +55,7 @@ export class CartService {
   }
 
   removeFromCart(productId: string) {
-    let cart = this.getCart().filter(item => item.id !== productId);
+    const cart = this.getCart().filter(item => item.id !== productId);
     this.updateCart(cart);
     this.updateCartCount();
   }

@@ -26,8 +26,8 @@ interface Product {
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  isAdmin: boolean = false;
-  dropdownOpen: { [key: string]: boolean } = {};
+  isAdmin = false;
+  dropdownOpen:  Record<string, boolean> = {};
 
   constructor(
     private http: HttpClient,

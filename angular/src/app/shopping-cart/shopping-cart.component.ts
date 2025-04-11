@@ -23,7 +23,7 @@ interface CartItem {
 export class ShoppingCartComponent implements OnInit {
   cart: CartItem[] = [];
   customerEmail: string | null = null;
-  orderStatus: string = '';
+  orderStatus = '';
 
   constructor(private cartService: CartService,
               private authService: AuthService,
