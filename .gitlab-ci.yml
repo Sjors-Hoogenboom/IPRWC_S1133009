@@ -133,8 +133,9 @@ deploy:
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
   script:
     - |
-      ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+      
+      ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       cd /var/www/IPRWC
 
       docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
