@@ -124,7 +124,7 @@ build-backend:
 
 deploy:
   stage: deploy
-  image: alpine:3.21.3
+  image: docker:24.0.7-cli
   services:
     - docker:dind
   before_script:
