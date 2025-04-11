@@ -125,6 +125,8 @@ build-backend:
 deploy:
   stage: deploy
   image: alpine:3.21.3
+  services:
+    - docker:dind
   before_script:
     - apk add --no-cache openssh
     - echo "$SSH_PRIVATE_KEY" > id_rsa
