@@ -3,12 +3,11 @@ package com.Sjors_Hoogenboom.IPRWC.services;
 import com.Sjors_Hoogenboom.IPRWC.entities.Products;
 import com.Sjors_Hoogenboom.IPRWC.exceptions.DuplicateProductException;
 import com.Sjors_Hoogenboom.IPRWC.repository.ProductRepository;
+import java.util.List;
+import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ProductService {

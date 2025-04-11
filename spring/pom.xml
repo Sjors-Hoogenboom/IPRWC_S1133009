@@ -111,7 +111,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<configLocation>google_checks.xml</configLocation> <!-- or sun_checks.xml -->
+					<configLocation>checkstyle.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
 					<failsOnError>true</failsOnError>
 				</configuration>

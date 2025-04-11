@@ -2,13 +2,12 @@ package com.Sjors_Hoogenboom.IPRWC.controllers;
 
 import com.Sjors_Hoogenboom.IPRWC.dto.SignupRequest;
 import com.Sjors_Hoogenboom.IPRWC.services.AuthService;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @CrossOrigin
 @RestController

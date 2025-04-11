@@ -5,11 +5,11 @@ import com.Sjors_Hoogenboom.IPRWC.entities.Users;
 import com.Sjors_Hoogenboom.IPRWC.enums.UserRole;
 import com.Sjors_Hoogenboom.IPRWC.repository.ProductRepository;
 import com.Sjors_Hoogenboom.IPRWC.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import jakarta.annotation.PostConstruct;
 
 @Service
 public class AdminServiceImplementation {

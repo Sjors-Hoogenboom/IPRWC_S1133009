@@ -2,11 +2,10 @@ package com.Sjors_Hoogenboom.IPRWC.entities;
 
 import com.Sjors_Hoogenboom.IPRWC.enums.UserRole;
 import jakarta.persistence.*;
+import java.util.UUID;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
 
 @Entity
 @Data

@@ -2,11 +2,11 @@ package com.Sjors_Hoogenboom.IPRWC.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import lombok.Data;
 
 @Entity
 @Data

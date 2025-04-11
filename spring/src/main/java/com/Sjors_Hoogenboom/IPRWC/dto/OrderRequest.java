@@ -1,7 +1,7 @@
 package com.Sjors_Hoogenboom.IPRWC.dto;
 
-import lombok.Data;
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class OrderRequest {
