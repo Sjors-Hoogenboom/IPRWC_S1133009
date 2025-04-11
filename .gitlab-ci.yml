@@ -136,17 +136,17 @@ deploy:
       ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       cd /var/www/IPRWC
 
-      docker load -i backend-spring.tar || true
-      docker load -i frontend-angular.tar || true
+      docker load -i backend-spring.tar
+      docker load -i frontend-angular.tar
       
-      docker stop frontend-angular || true
-      docker rm frontend-angular || true
+      docker stop frontend-angular
+      docker rm frontend-angular
       
-      docker stop backend-spring || true
-      docker rm backend-spring || true
+      docker stop backend-spring
+      docker rm backend-spring
 
-      docker run -d --name frontend-angular -p 80:80 frontend-angular || true
-      docker compose up -d || true
+      docker run -d --name frontend-angular -p 80:80 frontend-angular
+      docker compose up -d
       EOF
   only:
     - master
