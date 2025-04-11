@@ -89,7 +89,6 @@ build-frontend:
   script:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
-    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular -o frontend-angular.tar
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
   artifacts:
     paths:
@@ -115,7 +114,6 @@ build-backend:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
-    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring -o ../backend-spring.tar
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   artifacts:
     paths:
@@ -134,6 +132,12 @@ deploy:
     - mkdir -p ~/.ssh
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
   script:
+    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+    - docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
+    - docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
+    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring -o backend-spring.tar
+    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular -o frontend-angular.tar
+    - scp -i id_rsa backend-spring.tar frontend-angular.tar $SSH_USER@$SERVER_IP:/var/www/IPRWC/
     - |
       ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       cd /var/www/IPRWC
