@@ -89,7 +89,6 @@ build-frontend:
   script:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
-    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular -o frontend-angular.tar
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
   artifacts:
     paths:
@@ -115,7 +114,6 @@ build-backend:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
-    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring -o ../backend-spring.tar
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
   artifacts:
     paths:
@@ -134,14 +132,15 @@ deploy:
     - mkdir -p ~/.ssh
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/authorized_keys
   script:
-    - scp -i id_rsa backend-spring.tar frontend-angular.tar $SSH_USER@$SERVER_IP:/var/www/IPRWC/
     - ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
+      export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+      docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" $CI_REGISTRY
       cd /var/www/IPRWC
-      docker load -i backend-spring.tar || true
-      docker load -i frontend-angular.tar || true
+      docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
+      docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
       docker stop $(docker ps -q --filter ancestor=frontend-angular) || true
       docker rm $(docker ps -aq --filter ancestor=frontend-angular) || true
-      docker run -d -p 80:80 frontend-angular || true
-      docker compose up -d || true
+      docker run -d -p 80:80 registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular || true
+      docker compose -f /var/www/IPRWC/docker-compose.yml up -d
   only:
     - master
