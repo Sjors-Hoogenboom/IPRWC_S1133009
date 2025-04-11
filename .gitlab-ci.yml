@@ -9,7 +9,6 @@ variables:
   DOCKER_TLS_CERTDIR: ""
   DOCKER_CLIENT_TIMEOUT: 180
   COMPOSE_HTTP_TIMEOUT: 180
-  MAVEN_USER_HOME: "$CI_PROJECT_DIR/.m2"
 
 verify-frontend:
   stage: verify
@@ -90,10 +89,6 @@ build-frontend:
     - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
-  artifacts:
-    paths:
-      - frontend-angular.tar
-    expire_in: 1 hour
   only:
     - master
 
@@ -115,10 +110,6 @@ build-backend:
     - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
     - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
     - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
-  artifacts:
-    paths:
-      - backend-spring.tar
-    expire_in: 1 hour
   only:
     - master
 
