@@ -79,48 +79,50 @@ variables:
 #    - npx ng test --watch=false --browsers=ChromeHeadlessNoSandbox
 #
 
-#build-frontend:
-#  stage: build
-#  image: docker:24.0.7-cli
-#  services:
-#    - docker:dind
-#  before_script:
-#  - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-#  script:
-#    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-#    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
-#    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
-#  artifacts:
-#    paths:
-#      - frontend-angular.tar
-#    expire_in: 1 hour
-#  only:
-#    - master
-#
-#build-backend:
-#  stage: build
-#  image: docker:24.0.7-cli
-#  services:
-#    - docker:dind
-#  cache:
-#    key: maven-cache
-#    paths:
-#      - .m2/repository
-#  before_script:
-#    - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
-#    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
-#  script:
-#    - cd spring
-#    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-#    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
-#    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
-#    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
-#  artifacts:
-#    paths:
-#      - backend-spring.tar
-#    expire_in: 1 hour
-#  only:
-#    - master
+build-frontend:
+  stage: build
+  image: docker:24.0.7-cli
+  services:
+    - docker:dind
+  before_script:
+  - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular ./angular
+    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular -o frontend-angular.tar
+    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
+  artifacts:
+    paths:
+      - frontend-angular.tar
+    expire_in: 1 hour
+  only:
+    - master
+
+build-backend:
+  stage: build
+  image: docker:24.0.7-cli
+  services:
+    - docker:dind
+  cache:
+    key: maven-cache
+    paths:
+      - .m2/repository
+  before_script:
+    - apk add maven openjdk21 || apt-get install -y maven openjdk-21-jdk
+    - echo "$CI_JOB_TOKEN" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - cd spring
+    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+    - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository clean package -DskipTests
+    - docker build -t registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring .
+    - docker save registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring -o ../backend-spring.tar
+    - docker push registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
+  artifacts:
+    paths:
+      - backend-spring.tar
+    expire_in: 1 hour
+  only:
+    - master
 
 deploy:
   stage: deploy
@@ -132,20 +134,18 @@ deploy:
     - mkdir -p ~/.ssh
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
   script:
-    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-
     - |
       ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       cd /var/www/IPRWC
 
-      docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
-      docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
+      docker load -i backend-spring.tar || true
+      docker load -i frontend-angular.tar || true
 
-      docker stop $(docker ps -q --filter ancestor=registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular) || true
-      docker rm $(docker ps -aq --filter ancestor=registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular) || true
+      docker stop $(docker ps -q --filter ancestor=frontend-angular) || true
+      docker rm $(docker ps -aq --filter ancestor=frontend-angular) || true
 
-      docker run -d -p 80:80 registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular || true
-      docker compose -f /var/www/IPRWC/docker-compose.yml up -d || true
+      docker run -d -p 80:80 frontend-angular || true
+      docker compose up -d || true
       EOF
   only:
     - master
