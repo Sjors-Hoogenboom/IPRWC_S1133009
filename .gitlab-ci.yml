@@ -132,9 +132,9 @@ deploy:
     - mkdir -p ~/.ssh
     - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
   script:
+    - export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
+
     - |
-      export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-      
       ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       cd /var/www/IPRWC
 
