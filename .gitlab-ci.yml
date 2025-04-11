@@ -150,6 +150,7 @@ deploy:
       
       docker stop frontend-angular || true
       docker rm frontend-angular || true
+      
       docker stop backend-spring || true
       docker rm backend-spring || true
 
