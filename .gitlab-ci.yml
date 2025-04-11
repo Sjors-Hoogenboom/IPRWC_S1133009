@@ -21,7 +21,6 @@ verify-frontend:
     - cd angular
     - npm ci
     - npm run lint
-  allow_failure: true
   artifacts:
     when: always
     paths:
@@ -37,7 +36,6 @@ verify-backend:
   script:
     - cd spring
     - mvn -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository checkstyle:check
-  allow_failure: true
   artifacts:
     when: always
     paths:
