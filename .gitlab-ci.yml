@@ -135,12 +135,14 @@ deploy:
     - |
       ssh -i id_rsa $SSH_USER@$SERVER_IP << 'EOF'
       export LOWERCASE_PATH=$(echo "$CI_PROJECT_PATH" | tr '[:upper:]' '[:lower:]')
-      docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" $CI_REGISTRY
       cd /var/www/IPRWC
+
       docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/backend-spring
       docker pull registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular
-      docker stop $(docker ps -q --filter ancestor=frontend-angular) || true
-      docker rm $(docker ps -aq --filter ancestor=frontend-angular) || true
+
+      docker stop $(docker ps -q --filter ancestor=registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular) || true
+      docker rm $(docker ps -aq --filter ancestor=registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular) || true
+
       docker run -d -p 80:80 registry.inf-hsleiden.nl/$LOWERCASE_PATH/frontend-angular || true
       docker compose -f /var/www/IPRWC/docker-compose.yml up -d || true
       EOF
